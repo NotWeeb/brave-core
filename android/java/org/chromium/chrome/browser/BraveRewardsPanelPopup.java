@@ -40,7 +40,7 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -61,7 +61,6 @@ import org.chromium.chrome.browser.tab.TabLaunchType;
 import org.chromium.chrome.browser.tabmodel.TabModelSelectorImpl;
 import org.chromium.chrome.R;
 import org.chromium.content_public.browser.LoadUrlParams;
-import org.chromium.base.ContextUtils;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -1558,7 +1557,7 @@ public class BraveRewardsPanelPopup implements BraveRewardsObserver, BraveReward
 
     private void SetAddFundsBtnClickHandler(@WalletStatus final int status) {
         Button btnAddFunds = (Button)root.findViewById(R.id.br_add_funds);
-        if (status == BraveRewardsExternalWallet.VERIFIED) {
+        if (status != BraveRewardsExternalWallet.VERIFIED) {
             btnAddFunds.setEnabled(false);
             return;
         }
