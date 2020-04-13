@@ -32,7 +32,9 @@ namespace brave_rewards {
     base::Value dict(base::Value::Type::DICTIONARY);
     dict.SetKey("token", base::Value(token));
     dict.SetKey("address", base::Value(address));
-    dict.SetKey("status", base::Value((int32_t)(status)));  //enum class WalletStatus : int32_t
+
+    // enum class WalletStatus : int32_t
+    dict.SetKey("status", base::Value((int32_t)(status)));
     dict.SetKey("type", base::Value(type));
     dict.SetKey("verify_url", base::Value(verify_url));
     dict.SetKey("add_url", base::Value(add_url));

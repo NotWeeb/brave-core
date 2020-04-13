@@ -261,7 +261,7 @@ class BraveRewardsNativeWorker : public brave_rewards::RewardsServiceObserver,
 
  private:
     std::string StdStrStrMapToJsonString(
-        const std::map<std::string,std::string>& args);
+        const std::map<std::string, std::string>& args);
 
     void OnBalance(int32_t result,
         std::unique_ptr<brave_rewards::Balance> balance);

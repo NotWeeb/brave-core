@@ -721,10 +721,11 @@ void BraveRewardsNativeWorker::GetExternalWallet(JNIEnv* env,
     const base::android::JavaParamRef<jobject>& obj,
     const base::android::JavaParamRef<jstring>& wallet_type) {
   if (brave_rewards_service_) {
-    std::string str_wallet_type = base::android::ConvertJavaStringToUTF8(env, wallet_type);
+    std::string str_wallet_type =
+        base::android::ConvertJavaStringToUTF8(env, wallet_type);
     auto callback = base::Bind(
-      &BraveRewardsNativeWorker::OnGetExternalWallet,
-      base::Unretained(this));
+        &BraveRewardsNativeWorker::OnGetExternalWallet,
+        base::Unretained(this));
     brave_rewards_service_->GetExternalWallet(str_wallet_type, callback);
   }
 }
@@ -742,7 +743,8 @@ void BraveRewardsNativeWorker::DisconnectWallet(JNIEnv* env,
     const base::android::JavaParamRef<jobject>& obj,
     const base::android::JavaParamRef<jstring>& wallet_type) {
   if (brave_rewards_service_) {
-    std::string str_wallet_type = base::android::ConvertJavaStringToUTF8(env, wallet_type);
+    std::string str_wallet_type =
+        base::android::ConvertJavaStringToUTF8(env, wallet_type);
     brave_rewards_service_->DisconnectWallet(str_wallet_type);
   }
 }
@@ -760,7 +762,6 @@ void BraveRewardsNativeWorker::ProcessRewardsPageUrl(JNIEnv* env,
         const base::android::JavaParamRef<jobject>& obj,
         const base::android::JavaParamRef<jstring>& path,
         const base::android::JavaParamRef<jstring>& query) {
-
   if (brave_rewards_service_) {
     std::string cpath = base::android::ConvertJavaStringToUTF8(env, path);
     std::string cquery = base::android::ConvertJavaStringToUTF8(env, query);
@@ -787,7 +788,7 @@ std::string BraveRewardsNativeWorker::StdStrStrMapToJsonString(
     const std::map<std::string, std::string>& args) {
     std::string json_args;
     base::Value dict(base::Value::Type::DICTIONARY);
-    for(const auto & item : args) {
+    for (const auto & item : args) {
       dict.SetKey(item.first, base::Value(item.second));
     }
     base::JSONWriter::Write(dict, &json_args);
