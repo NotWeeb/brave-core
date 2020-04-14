@@ -30,17 +30,17 @@ namespace brave_rewards {
   std::string ExternalWallet::toJson() {
     std::string json_wallet;
     base::Value dict(base::Value::Type::DICTIONARY);
-    dict.SetKey("token", base::Value(token));
-    dict.SetKey("address", base::Value(address));
+    dict.SetStringKey("token", token);
+    dict.SetStringKey("address", address);
 
     // enum class WalletStatus : int32_t
-    dict.SetKey("status", base::Value((int32_t)(status)));
-    dict.SetKey("type", base::Value(type));
-    dict.SetKey("verify_url", base::Value(verify_url));
-    dict.SetKey("add_url", base::Value(add_url));
-    dict.SetKey("withdraw_url", base::Value(withdraw_url));
-    dict.SetKey("user_name", base::Value(user_name));
-    dict.SetKey("account_url", base::Value(account_url));
+    dict.SetIntKey("status", static_cast<int32_t>(status));
+    dict.SetStringKey("type", type);
+    dict.SetStringKey("verify_url", verify_url);
+    dict.SetStringKey("add_url", add_url);
+    dict.SetStringKey("withdraw_url", withdraw_url);
+    dict.SetStringKey("user_name", user_name);
+    dict.SetStringKey("account_url", account_url);
     base::JSONWriter::Write(dict, &json_wallet);
     return json_wallet;
   }
