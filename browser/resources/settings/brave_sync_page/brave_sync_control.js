@@ -115,6 +115,9 @@ Polymer({
 
   /** @private */
   onSetupConfirm_: function() {
+    if (!this.passphrase) {
+      this.passphrase = this.$$('#enterSyncCode').value;
+    }
     this.fire('sync-setup-done', true);
   },
 
