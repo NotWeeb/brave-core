@@ -8,6 +8,7 @@
 #include "brave/common/extensions/extension_constants.h"
 #include "brave/common/pref_names.h"
 #include "brave/components/brave_rewards/browser/buildflags/buildflags.h"
+#include "brave/components/brave_rewards/common/pref_names.h"
 #include "chrome/browser/browser_process.h"
 #include "chrome/browser/chrome_notification_types.h"
 #include "chrome/browser/profiles/profile.h"
