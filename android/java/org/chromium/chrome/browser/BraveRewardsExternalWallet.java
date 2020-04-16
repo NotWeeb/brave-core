@@ -1,4 +1,4 @@
-/** Copyright (c) 2019 The Brave Authors. All rights reserved.
+/** Copyright (c) 2020 The Brave Authors. All rights reserved.
   * This Source Code Form is subject to the terms of the Mozilla Public
   * License, v. 2.0. If a copy of the MPL was not distributed with this file,
   * You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -42,6 +42,16 @@ class BraveRewardsExternalWallet {
     public static final int DISCONNECTED_NOT_VERIFIED = 3;
     public static final int DISCONNECTED_VERIFIED = 4;
     public static final int PENDING = 5;
+
+    public String mAccount_url;
+    public String mAdd_url;
+    public String mAddress;
+    @WalletStatus public int mStatus;
+    public String mToken;
+    public String mType;
+    public String mUser_name;
+    public String mVerify_url;
+    public String mWithdraw_url;
 
     BraveRewardsExternalWallet (String json_external_wallet) throws IOException {
         JsonReader reader = new JsonReader(new StringReader(json_external_wallet));
@@ -139,14 +149,4 @@ class BraveRewardsExternalWallet {
         }
         return value;
     }
-
-    public String mAccount_url;
-    public String mAdd_url;
-    public String mAddress;
-    @WalletStatus public int mStatus;
-    public String mToken;
-    public String mType;
-    public String mUser_name;
-    public String mVerify_url;
-    public String mWithdraw_url;
 }
