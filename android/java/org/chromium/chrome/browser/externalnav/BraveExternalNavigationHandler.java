@@ -38,4 +38,14 @@ public class BraveExternalNavigationHandler extends ExternalNavigationHandler {
         mBraveUphold = new BraveUphold();
         mBraveUphold.CompleteUpholdVerification(params, this);
     }
+
+    /**
+     * This function will be removed by ASM byte-code patching tool
+     * and redirected to ExternalNavigationHandler.
+     */
+    public @OverrideUrlLoadingResult int clobberCurrentTabWithFallbackUrl(
+            String browserFallbackUrl, ExternalNavigationParams params) {
+        assert false;
+        return OverrideUrlLoadingResult.OVERRIDE_WITH_CLOBBERING_TAB;
+    }
 }
