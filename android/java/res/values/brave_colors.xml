@@ -71,4 +71,7 @@
     <color name="translucent_activity_background_color">#AA3B3B3B</color>
     <color name="user_wallet_background">#F1F3F5</color>
     <color name="user_wallet_status">#49CC69</color>
+
+    <!-- User wallet -->
+    <color name="user_wallet_dimmed_note">#E6E3F4</color>
 </resources>

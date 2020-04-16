@@ -113,7 +113,7 @@
         android:drawableEnd="@drawable/uphold_green"
         android:drawablePadding="6dp"
         android:text="@string/verify_wallet_service_note"
-        android:textColor="#e6e3f4"
+        android:textColor="@color/user_wallet_dimmed_note"
         android:textSize="@dimen/verify_wallet_header4_font_size"/>
 
     <TextView
@@ -123,7 +123,7 @@
         android:layout_marginTop="@dimen/verify_wallet_margin3"
         android:text="@string/verify_wallet_uphold_note1"
         android:textAlignment="textStart"
-        android:textColor="#e6e3f4"
+        android:textColor="@color/user_wallet_dimmed_note"
         android:textSize="@dimen/verify_wallet_header4_font_size"/>
 
     <TextView
@@ -133,6 +133,6 @@
         android:layout_marginTop="@dimen/verify_wallet_margin3"
         android:text="@string/verify_wallet_brave_note1"
         android:textAlignment="textStart"
-        android:textColor="#e6e3f4"
+        android:textColor="@color/user_wallet_dimmed_note"
         android:textSize="@dimen/verify_wallet_header4_font_size"/>
 </LinearLayout>

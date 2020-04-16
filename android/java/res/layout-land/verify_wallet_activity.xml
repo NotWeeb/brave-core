@@ -148,7 +148,7 @@
                 android:textSize="@dimen/verify_wallet_header4_font_size_land"
                 android:layout_gravity="center"
                 android:gravity="center_vertical"
-                android:textColor="#e6e3f4"
+                android:textColor="@color/user_wallet_dimmed_note"
                 android:drawableEnd="@drawable/uphold_green"
                 android:drawablePadding="6dp"
                 android:layout_marginTop="@dimen/verify_wallet_margin2_land"/>
@@ -160,7 +160,7 @@
                 android:textSize="@dimen/verify_wallet_header4_font_size_land"
                 android:layout_gravity="start"
                 android:textAlignment="textStart"
-                android:textColor="#e6e3f4"
+                android:textColor="@color/user_wallet_dimmed_note"
                 android:layout_marginTop="@dimen/verify_wallet_margin3_land"/>
 
             <TextView
@@ -170,7 +170,7 @@
                 android:textSize="@dimen/verify_wallet_header4_font_size_land"
                 android:layout_gravity="start"
                 android:textAlignment="textStart"
-                android:textColor="#e6e3f4"
+                android:textColor="@color/user_wallet_dimmed_note"
                 android:layout_marginTop="@dimen/verify_wallet_margin3_land"/>
         </LinearLayout>
     </LinearLayout>
