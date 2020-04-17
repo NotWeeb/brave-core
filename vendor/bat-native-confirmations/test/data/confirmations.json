@@ -1,1 +1,70 @@
-{"transaction_history":{"transactions":[]},"catalog_issuers":{"issuers":[],"public_key":""},"unblinded_tokens":[],"unblinded_payment_tokens":[]}
+{
+  "transaction_history": {
+    "transactions": [
+    ]
+  },
+  "catalog_issuers": {
+    "issuers": [
+      {
+        "name": "0.3BAT",
+        "public_key": "6DBiZUS47m8eb5ohI2MiRaERLzS4DQgMp4nxPLKAenA="
+      },
+      {
+        "name": "0.025BAT",
+        "public_key": "CrQLMWmUuYog6Q93nScS8Lo1HHSex8WM2Qxij7qhjkQ="
+      },
+      {
+        "name": "0.01BAT",
+        "public_key": "JiwFR2EU/Adf1lgox+xqOVPuc6a/rxdy/LguFG5eaXg="
+      },
+      {
+        "name": "0.20BAT",
+        "public_key": "VihGXGoiQ5Fjxe4SrskIVMcmERa1LoAgvhFxxfLmNEI="
+      },
+      {
+        "name": "0.25BAT",
+        "public_key": "YOIEGq4joK7rtkWdcNdNNGT5xlU/KIrri4AX19qwZW4="
+      },
+      {
+        "name": "0.10BAT",
+        "public_key": "aDD4SJmIj2xwdA6D00K1dopTg90oOFpwd2iiK8bqqlQ="
+      },
+      {
+        "name": "0.05BAT",
+        "public_key": "bPE1QE65mkIgytffeu7STOfly+x10BXCGuk5pVlOHQU="
+      },
+      {
+        "name": "0.15BAT",
+        "public_key": "iJcG3AkH1sgl+5YCZuo+4Q/7aeBOnYyntkIUXeMbDCs="
+      },
+      {
+        "name": "0BAT",
+        "public_key": "lLO5tErGoTK0askrALab6pKGAnBHqELSyw/evqZRwH8="
+      }
+    ],
+    "public_key": "crDVI1R6xHQZ4D9cQu4muVM5MaaM1QcOT4It8Y/CYlw="
+  },
+  "unblinded_tokens": [
+    {
+      "public_key": "crDVI1R6xHQZ4D9cQu4muVM5MaaM1QcOT4It8Y/CYlw=",
+      "unblinded_token": "/JI6lJSLrPG1rqgqp4h8957iJAiMwF1ETQyIRs3cH0RUSuwiHMy1l3VHTlzy8JnCg5Uc9OZyiim9NVag1tduDi4CbEG9DjWD6xGhvmO3pLLd7FdqpTEvXBs45er5S3kL"
+    }
+  ],
+  "unblinded_payment_tokens": [
+  ],
+  "confirmations": {
+    "failed_confirmations": [
+    ]
+  },
+  "next_token_redemption_date_in_seconds": "2147483647",
+  "ads_rewards": {
+    "payments": [
+      {
+        "balance": 123,
+        "month": "2020-04",
+        "transaction_count": "7"
+      }
+    ],
+    "grants_balance": 0
+  }
+}

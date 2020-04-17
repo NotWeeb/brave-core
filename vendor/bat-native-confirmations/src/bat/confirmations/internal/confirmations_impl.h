@@ -47,6 +47,7 @@ class ConfirmationsImpl : public Confirmations {
   // Confirmations
   void AppendConfirmationToQueue(const ConfirmationInfo& confirmation_info);
   void StartRetryingFailedConfirmations();
+  const ConfirmationList& GetFailedConfirmations() const;
 
   // Ads rewards
   void UpdateAdsRewards(const bool should_refresh) override;
@@ -91,7 +92,7 @@ class ConfirmationsImpl : public Confirmations {
       const ConfirmationType confirmation_type) override;
 
   // State
-  void SaveState();
+  virtual void SaveState();
 
  private:
   bool is_initialized_;

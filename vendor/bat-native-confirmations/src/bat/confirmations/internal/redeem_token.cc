@@ -221,13 +221,13 @@ void RedeemToken::OnFetchPaymentToken(
     ConfirmationInfo new_confirmation = confirmation;
     new_confirmation.created = false;
 
-    OnRedeem(FAILED, new_confirmation);
+    OnRedeem(FAILED, new_confirmation, true);
     return;
   }
 
   if (response_status_code != net::HTTP_OK) {
     BLOG(ERROR) << "Failed to fetch payment token";
-    OnRedeem(FAILED, confirmation);
+    OnRedeem(FAILED, confirmation, true);
     return;
   }
 
@@ -235,7 +235,7 @@ void RedeemToken::OnFetchPaymentToken(
   base::Optional<base::Value> dictionary = base::JSONReader::Read(response);
   if (!dictionary || !dictionary->is_dict()) {
     BLOG(ERROR) << "Failed to parse response: " << response;
-    OnRedeem(FAILED, confirmation);
+    OnRedeem(FAILED, confirmation, true);
     return;
   }
 
@@ -243,7 +243,7 @@ void RedeemToken::OnFetchPaymentToken(
   auto* id_value = dictionary->FindKey("id");
   if (!id_value) {
     BLOG(ERROR) << "Response missing id";
-    OnRedeem(FAILED, confirmation);
+    OnRedeem(FAILED, confirmation, true);
     return;
   }
 
@@ -261,7 +261,7 @@ void RedeemToken::OnFetchPaymentToken(
   auto* payment_token_value = dictionary->FindKey("paymentToken");
   if (!payment_token_value) {
     BLOG(ERROR) << "Response missing paymentToken";
-    OnRedeem(FAILED, confirmation);
+    OnRedeem(FAILED, confirmation, true);
     return;
   }
 
@@ -272,7 +272,7 @@ void RedeemToken::OnFetchPaymentToken(
     OnRedeem(FAILED, confirmation, false);
 
     // Token is in a bad state so redeem a new token
-    OnRedeem(FAILED, confirmation);
+    OnRedeem(FAILED, confirmation, true);
     return;
   }
 
@@ -280,7 +280,7 @@ void RedeemToken::OnFetchPaymentToken(
   auto* public_key_value = payment_token_dictionary->FindKey("publicKey");
   if (!public_key_value) {
     BLOG(ERROR) << "Response missing publicKey in paymentToken dictionary";
-    OnRedeem(FAILED, confirmation);
+    OnRedeem(FAILED, confirmation, true);
     return;
   }
   auto public_key_base64 = public_key_value->GetString();
@@ -290,7 +290,7 @@ void RedeemToken::OnFetchPaymentToken(
   if (!confirmations_->IsValidPublicKeyForCatalogIssuers(public_key_base64)) {
     BLOG(ERROR) << "Response public_key: " << public_key_base64
         << " was not found in the catalog issuers";
-    OnRedeem(FAILED, confirmation);
+    OnRedeem(FAILED, confirmation, true);
     return;
   }
 
@@ -298,7 +298,7 @@ void RedeemToken::OnFetchPaymentToken(
   auto* batch_proof_value = payment_token_dictionary->FindKey("batchProof");
   if (!batch_proof_value) {
     BLOG(ERROR) << "Response missing batchProof in paymentToken dictionary";
-    OnRedeem(FAILED, confirmation);
+    OnRedeem(FAILED, confirmation, true);
     return;
   }
 
@@ -309,14 +309,14 @@ void RedeemToken::OnFetchPaymentToken(
   auto* signed_tokens_value = payment_token_dictionary->FindKey("signedTokens");
   if (!signed_tokens_value) {
     BLOG(ERROR) << "Response missing signedTokens in paymentToken dictionary";
-    OnRedeem(FAILED, confirmation);
+    OnRedeem(FAILED, confirmation, true);
     return;
   }
 
   base::ListValue signed_token_base64_values(signed_tokens_value->GetList());
   if (signed_token_base64_values.GetSize() != 1) {
     BLOG(ERROR) << "Too many signedTokens";
-    OnRedeem(FAILED, confirmation);
+    OnRedeem(FAILED, confirmation, true);
     return;
   }
 
@@ -357,7 +357,7 @@ void RedeemToken::OnFetchPaymentToken(
 
     BLOG(ERROR) << "  Public key: " << public_key_base64;
 
-    OnRedeem(FAILED, confirmation);
+    OnRedeem(FAILED, confirmation, true);
     return;
   }
 
@@ -450,21 +450,34 @@ ConfirmationInfo RedeemToken::CreateConfirmationInfo(
   ConfirmationInfo confirmation;
 
   confirmation.id = base::GenerateGUID();
+  BLOG(INFO) << "confirmation.id: " << confirmation.id;
   confirmation.creative_instance_id = ad.creative_instance_id;
+  BLOG(INFO) << "confirmation.creative_instance_id: "
+      << confirmation.creative_instance_id;
   confirmation.type = confirmation_type;
   confirmation.token_info = token;
+  BLOG(INFO) << "confirmation.token_info:";
+  BLOG(INFO) << "  unblinded_token: " << token.unblinded_token.encode_base64();
+  BLOG(INFO) << "  public_key: " << token.public_key;
 
   auto payment_tokens = helper::Security::GenerateTokens(1);
   confirmation.payment_token = payment_tokens.front();
+  BLOG(INFO) << "confirmation.payment_token: "
+      << confirmation.payment_token.encode_base64();
 
   auto blinded_payment_tokens = helper::Security::BlindTokens(payment_tokens);
   auto blinded_payment_token = blinded_payment_tokens.front();
   confirmation.blinded_payment_token = blinded_payment_token;
+  BLOG(INFO) << "confirmation.blinded_payment_token: "
+      << blinded_payment_token.encode_base64();
 
   CreateConfirmationRequest request;
   auto payload = request.CreateConfirmationRequestDTO(confirmation);
+  BLOG(INFO) << "confirmation.payload: " << payload;
   confirmation.credential = request.CreateCredential(token, payload);
   confirmation.timestamp_in_seconds = Time::NowInSeconds();
+  BLOG(INFO) << "confirmation.timestamp_in_seconds: "
+      << confirmation.timestamp_in_seconds;
 
   return confirmation;
 }

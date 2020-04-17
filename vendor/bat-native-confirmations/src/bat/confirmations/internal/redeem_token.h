@@ -34,7 +34,7 @@ class RedeemToken {
       UnblindedTokens* unblinded_tokens,
       UnblindedTokens* unblinded_payment_tokens);
 
-  ~RedeemToken();
+  virtual ~RedeemToken();
 
   void Redeem(
       const AdInfo& ad,
@@ -65,10 +65,10 @@ class RedeemToken {
       const std::map<std::string, std::string>& headers,
       const ConfirmationInfo& confirmation);
 
-  void OnRedeem(
+  virtual void OnRedeem(
       const Result result,
       const ConfirmationInfo& confirmation,
-      const bool should_retry = true);
+      const bool should_retry);
 
   void CreateAndAppendNewConfirmationToRetryQueue(
       const ConfirmationInfo& confirmation);

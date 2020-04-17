@@ -830,7 +830,7 @@ void ConfirmationsImpl::SetWalletInfo(std::unique_ptr<WalletInfo> info) {
 
   BLOG(INFO) << "SetWalletInfo:";
   BLOG(INFO) << "  Payment id: " << wallet_info_.payment_id;
-  BLOG(INFO) << "  Private key: ********";
+  BLOG(INFO) << "  Private key: " << wallet_info_.private_key;
 
   NotifyAdsIfConfirmationsIsReady();
 
@@ -1194,6 +1194,10 @@ void ConfirmationsImpl::RetryFailedConfirmations() {
   redeem_token_->Redeem(confirmation_info);
 
   StartRetryingFailedConfirmations();
+}
+
+const ConfirmationList& ConfirmationsImpl::GetFailedConfirmations() const {
+  return confirmations_;
 }
 
 }  // namespace confirmations
