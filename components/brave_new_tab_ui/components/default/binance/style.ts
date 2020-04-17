@@ -22,10 +22,11 @@ interface StyleProps {
   hideBalance?: boolean
   isFirstView?: boolean
   hideOverflow?: boolean
+  userAuthed?: boolean
   position?: 'left' | 'right'
 }
 
-export const WidgetWrapper = styled<{}, 'div'>('div')`
+export const WidgetWrapper = styled<StyleProps, 'div'>('div')`
   color: white;
   padding: 10px 15px;
   border-radius: 6px;
@@ -33,6 +34,7 @@ export const WidgetWrapper = styled<{}, 'div'>('div')`
   font-family: ${p => p.theme.fontFamily.body};
   overflow: hidden;
   min-width: 284px;
+  min-height: ${p => p.userAuthed ? '360px' : 'initial'};
   background-image: linear-gradient(140deg, #1F2327 0%, #000000 85%);
 `
 
@@ -190,7 +192,7 @@ export const ConnectButton = styled<StyleProps, 'a'>('a')`
   }
 `
 
-export const ConvertButton = styled<{}, 'button'>('button')`
+export const ActionButton = styled<{}, 'button'>('button')`
   font-size: 13px;
   font-weight: bold;
   border-radius: 20px;
@@ -200,7 +202,7 @@ export const ConvertButton = styled<{}, 'button'>('button')`
   padding: 10px 65px;
   cursor: pointer;
   color: #000;
-  margin-bottom: -10px;
+  margin-top: 20px;
 `
 
 export const BinanceIcon = styled<{}, 'div'>('div')`
@@ -266,7 +268,7 @@ export const NavigationItem = styled<StyleProps, 'div'>('div')`
 export const SelectedView = styled<StyleProps, 'div'>('div')`
   border: 1px solid rgb(70, 70, 70);
   overflow-y: ${p => p.hideOverflow ? 'hidden' : 'scroll'};
-  height: 170px;
+  height: 260px;
   width: 250px;
   margin-left: 4px;
 `
@@ -526,12 +528,6 @@ export const BuySellButton = styled(ConnectButton)`
   padding: 5px;
   margin: 5px 0px;
   background: ${p => p.isBuy ? '#3BB260' : '#DD5353'};
-`
-
-export const AvailableLabel = styled<{}, 'span'>('span')`
-  float: right;
-  margin-top: -27px;
-  font-size: 13px;
 `
 
 export const ConvertLabel = styled<{}, 'span'>('span')`
