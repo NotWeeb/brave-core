@@ -10,7 +10,9 @@ import android.os.Build;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.IOException;
 import android.view.ViewGroup;
 import android.view.View;
 import android.view.Gravity;
@@ -22,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.os.Handler;
 import android.net.Uri;
-import java.io.FileNotFoundException;
 
 import org.chromium.chrome.R;
 import org.chromium.content_public.browser.LoadUrlParams;
@@ -256,13 +257,18 @@ public class NTPUtil {
 
         if (ntpImage instanceof NTPBackgroundImagesBridge.Wallpaper) {
             NTPBackgroundImagesBridge.Wallpaper mWallpaper = (NTPBackgroundImagesBridge.Wallpaper) ntpImage;
+            InputStream inputStream = null;
             try {
                 Uri imageFileUri = Uri.parse("file://"+mWallpaper.getImagePath());
-                InputStream inputStream = mContext.getContentResolver().openInputStream(imageFileUri);
+                inputStream = mContext.getContentResolver().openInputStream(imageFileUri);
                 imageBitmap = BitmapFactory.decodeStream(inputStream, null, options);
             } catch(FileNotFoundException exc) {
                 Log.e("NTP", exc.getMessage());
                 return null;
+            } finally {
+                try {
+                    if (inputStream != null) inputStream.close();
+                } catch (IOException exception) {}
             }
             centerPointX = mWallpaper.getFocalPointX() == 0 ? (imageBitmap.getWidth()/2) : mWallpaper.getFocalPointX();
             centerPointY = mWallpaper.getFocalPointY() == 0 ? (imageBitmap.getHeight()/2) : mWallpaper.getFocalPointY();

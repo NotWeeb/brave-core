@@ -19,7 +19,6 @@ import android.os.Build;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.net.Uri;
-import java.io.InputStream;
 import java.io.FileNotFoundException;
 import android.graphics.BitmapFactory;
 
