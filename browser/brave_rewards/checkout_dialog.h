@@ -7,7 +7,9 @@
 #define BRAVE_BROWSER_BRAVE_REWARDS_CHECKOUT_DIALOG_H_
 
 #include <string>
+
 #include "base/callback.h"
+#include "brave/browser/brave_rewards/checkout_dialog_controller.h"
 
 namespace content {
 class WebContents;
@@ -17,7 +19,7 @@ namespace brave_rewards {
 
 using CheckoutDialogClosedCallback = base::OnceCallback<void()>;
 
-void ShowCheckoutDialog(
+base::WeakPtr<CheckoutDialogController> ShowCheckoutDialog(
     content::WebContents* initiator,
     CheckoutDialogClosedCallback on_dialog_closed);
 
