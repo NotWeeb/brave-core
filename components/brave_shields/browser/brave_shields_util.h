@@ -14,12 +14,12 @@
 #include "services/network/public/mojom/referrer_policy.mojom.h"
 
 namespace content {
+class BrowserContext;
 struct Referrer;
 }
 
 class GURL;
 class HostContentSettingsMap;
-class Profile;
 
 namespace brave_shields {
 
@@ -29,42 +29,61 @@ ContentSettingsPattern GetPatternFromURL(const GURL& url);
 std::string ControlTypeToString(ControlType type);
 ControlType ControlTypeFromString(const std::string& string);
 
-void SetBraveShieldsEnabled(Profile* profile, bool enable, const GURL& url);
+void SetBraveShieldsEnabled(content::BrowserContext* browser_context,
+                            bool enable,
+                            const GURL& url);
 // reset to the default value
-void ResetBraveShieldsEnabled(Profile* profile, const GURL& url);
-bool GetBraveShieldsEnabled(Profile* profile, const GURL& url);
+void ResetBraveShieldsEnabled(content::BrowserContext* browser_context,
+                              const GURL& url);
+bool GetBraveShieldsEnabled(content::BrowserContext* browser_context,
+                            const GURL& url);
 bool GetBraveShieldsEnabled(HostContentSettingsMap* map, const GURL& url);
 
-void SetAdControlType(Profile* profile, ControlType type, const GURL& url);
-ControlType GetAdControlType(Profile* profile, const GURL& url);
+void SetAdControlType(content::BrowserContext* browser_context,
+                      ControlType type,
+                      const GURL& url);
+ControlType GetAdControlType(content::BrowserContext* browser_context,
+                             const GURL& url);
 
-void SetCookieControlType(Profile* profile, ControlType type, const GURL& url);
+void SetCookieControlType(content::BrowserContext* browser_context,
+                          ControlType type,
+                          const GURL& url);
 void SetCookieControlType(HostContentSettingsMap* map,
                           ControlType type,
                           const GURL& url);
-ControlType GetCookieControlType(Profile* profile, const GURL& url);
+ControlType GetCookieControlType(content::BrowserContext* browser_context,
+                                 const GURL& url);
 ControlType GetCookieControlType(HostContentSettingsMap* map, const GURL& url);
 
 // Referrers is always set along with cookies so there is no setter and
 // these is just included for backwards compat.
-bool AllowReferrers(Profile* profile, const GURL& url);
+bool AllowReferrers(content::BrowserContext* browser_context, const GURL& url);
 bool AllowReferrers(HostContentSettingsMap* map, const GURL& url);
 
-void SetFingerprintingControlType(Profile* profile,
+void SetFingerprintingControlType(content::BrowserContext* browser_context,
                                   ControlType type,
                                   const GURL& url);
-ControlType GetFingerprintingControlType(Profile* profile, const GURL& url);
+ControlType GetFingerprintingControlType(
+    content::BrowserContext* browser_context,
+    const GURL& url);
 
-void SetHTTPSEverywhereEnabled(Profile* profile, bool enable, const GURL& url);
+void SetHTTPSEverywhereEnabled(content::BrowserContext* browser_context,
+                               bool enable,
+                               const GURL& url);
 // reset to the default value
-void SetHTTPSEverywhereEnabled(Profile* profile, bool enable, const GURL& url);
-void ResetHTTPSEverywhereEnabled(Profile* profile, const GURL& url);
-bool GetHTTPSEverywhereEnabled(Profile* profile, const GURL& url);
+void SetHTTPSEverywhereEnabled(content::BrowserContext* browser_context,
+                               bool enable,
+                               const GURL& url);
+void ResetHTTPSEverywhereEnabled(content::BrowserContext* browser_context,
+                                 const GURL& url);
+bool GetHTTPSEverywhereEnabled(content::BrowserContext* browser_context,
+                               const GURL& url);
 
-void SetNoScriptControlType(Profile* profile,
+void SetNoScriptControlType(content::BrowserContext* browser_context,
                             ControlType type,
                             const GURL& url);
-ControlType GetNoScriptControlType(Profile* profile, const GURL& url);
+ControlType GetNoScriptControlType(content::BrowserContext* browser_context,
+                                   const GURL& url);
 
 void DispatchBlockedEvent(const GURL& request_url,
                           int render_frame_id,
